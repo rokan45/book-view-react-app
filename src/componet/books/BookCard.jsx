@@ -1,10 +1,11 @@
 import React from "react";
 import { Star } from "lucide-react";
+import { Link } from "react-router";
 
 const BookCard = ({books}) => {
-    const {bookName,author,image,rating,category,tags}=books;
+    const {bookId,bookName,author,image,rating,category,tags}=books;
   return (
-    <div className="h-full flex flex-col bg-gray-100 rounded-2xl p-4 shadow-md border border-gray-200">
+    <Link to={`bookdetails/${bookId}`} className="h-full flex flex-col bg-white rounded-2xl p-4 shadow-md border border-gray-200">
       
       {/* Image */}
       <div className="bg-gray-200 rounded-xl flex items-center justify-center h-56 mb-4">
@@ -26,7 +27,7 @@ const BookCard = ({books}) => {
         </span>
       </div>
 
-      {/* Title (fixed height) */}
+      {/* Title */}
       <h2 className="text-lg font-semibold text-gray-800 mb-1 line-clamp-2 min-h-12">
         {bookName}
       </h2>
@@ -36,7 +37,7 @@ const BookCard = ({books}) => {
         <span className="font-medium text-gray-600">By :</span> {author}
       </p>
 
-      {/* Push footer to bottom */}
+      {/* catergory and rating */}
       <div className="mt-auto">
         <div className="border-t border-dashed border-gray-300 my-2"></div>
 
@@ -49,7 +50,7 @@ const BookCard = ({books}) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
