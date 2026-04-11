@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { BookContext } from '../../context/BookContext';
+import { Link } from 'react-router';
 
 const ReadBooks = () => {
 
@@ -11,7 +12,7 @@ const ReadBooks = () => {
         <div>
             {
                 storedBook.map(book => {
-                    const { image, bookName, author, yearOfPublishing, publisher, totalPages, category, rating } = book
+                    const { bookId,image, bookName, author, yearOfPublishing, publisher, totalPages, category, rating } = book
 
                     return (
                     <div key={book.bookId} className="bg-white border border-gray-200 rounded-xl p-5 flex gap-5 items-start max-w-full">
@@ -46,9 +47,9 @@ const ReadBooks = () => {
                             <div className="flex flex-wrap items-center gap-2">
                                 <span className="bg-blue-100 text-blue-700 text-xs px-4 py-1 rounded-full">Category: {category}</span>
                                 <span className="bg-amber-100 text-amber-700 text-xs px-4 py-1 rounded-full">Rating: {rating}</span>
-                                <button className="ml-auto bg-teal-500 hover:bg-teal-600 text-white text-sm px-5 py-1.5 rounded-full transition">
+                                <Link to={`/bookdetails/${bookId}`} className="ml-auto bg-teal-500 hover:bg-teal-600 text-white text-sm px-5 py-1.5 rounded-full transition">
                                     View Details
-                                </button>
+                                </Link>
                             </div>
 
                         </div>

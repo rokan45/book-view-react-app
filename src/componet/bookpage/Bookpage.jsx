@@ -7,7 +7,7 @@ const Bookpage = () => {
 
     const [activeBtn,setActiveBtn]=useState('read');
 
-    const {storedBook} = useContext(BookContext);
+    const {storedBook,wishlistStore} = useContext(BookContext);
    
 
     return (
@@ -32,13 +32,14 @@ const Bookpage = () => {
 
             {/* Toggle button */}
             <div className='flex items-center'>
-                <button onClick={()=>setActiveBtn('read')} className='btn rounded-r-none'>Read Books</button>
-                <button onClick={()=>setActiveBtn('wishlist')} className='btn rounded-l-none'>Wishlist Books</button>
+                <button onClick={()=>setActiveBtn('read')} className={activeBtn==="read"?"btn btn-accent rounded-r-none ":"btn rounded-r-none"}>Read Books</button>
+
+                <button onClick={()=>setActiveBtn('wishlist')} className={activeBtn==="read"?"btn rounded-l-none ":"btn btn-accent rounded-l-none"}>Wishlist Books</button>
             </div>
 
             <div className='mt-2'>
                 {
-                    activeBtn==="read"? <ReadBooks storedBook={storedBook}></ReadBooks>: <WishlistBooks></WishlistBooks>
+                    activeBtn==="read"? <ReadBooks storedBook={storedBook}></ReadBooks>: <WishlistBooks wishlistStore={wishlistStore} ></WishlistBooks>
                 }
             </div>
         </div>
