@@ -1,12 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BookContext } from '../../context/BookContext';
 import { Link } from 'react-router';
 import EmptyList from '../empty/EmptyList';
 
-const ReadBooks = () => {
+const ReadBooks = ({ sortingType }) => {
 
     const { storedBook } = useContext(BookContext);
-    console.log(storedBook);
+    // console.log(storedBook);
+    const [filterList, setFilterList] = useState(storedBook)
+
+
+    useEffect(() => {
+        if (sortingType === 'pages') {
+            const sortData = [...storedBook].sort((a, b) => a.totalPages - b.totalPages);
+            console.log(sortData);
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setFilterList(sortData);
+        }
+        else if (sortingType === 'rating') {
+            const sortData = [...storedBook].sort((a, b) => a.rating - b.rating);
+            console.log(sortData);
+            setFilterList(sortData);
+        }
+
+
+    }, [sortingType, storedBook])
 
 
     return (
@@ -15,7 +33,7 @@ const ReadBooks = () => {
             {
                 storedBook.length === 0 ? <EmptyList /> : <div>
                     {
-                        storedBook.map(book => {
+                        filterList.map(book => {
                             const { bookId, image, bookName, author, yearOfPublishing, publisher, totalPages, category, rating } = book
 
                             return (

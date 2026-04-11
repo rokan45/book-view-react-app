@@ -1,14 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { BookContext } from '../../context/BookContext';
 import ReadBooks from '../bookself/ReadBooks';
 import WishlistBooks from '../bookself/WishlistBooks';
 
 const Bookpage = () => {
 
-    const [activeBtn,setActiveBtn]=useState('read');
+    const [activeBtn, setActiveBtn] = useState('read');
 
-    const {storedBook,wishlistStore} = useContext(BookContext);
-   
+
+    const [sortingType, setSortigType] = useState("");
+
+
 
     return (
         <div className='mx-auto p-2'>
@@ -22,24 +24,24 @@ const Bookpage = () => {
             <div className="flex items-center justify-center mt-5">
                 <button className='btn btn-success'>
                     <span>Sort by:</span>
-                    <select>
+                    <select onChange={(e)=>setSortigType(e.target.value)}>
                         <option value="select">Select</option>
                         <option value="rating">Rating</option>
-                        <option value="pages">Number of Pages</option>
+                        <option value="pages">Pages</option>
                     </select>
                 </button>
             </div>
 
             {/* Toggle button */}
             <div className='flex items-center'>
-                <button onClick={()=>setActiveBtn('read')} className={activeBtn==="read"?"btn btn-accent rounded-r-none ":"btn rounded-r-none"}>Read Books</button>
+                <button onClick={() => setActiveBtn('read')} className={activeBtn === "read" ? "btn btn-accent rounded-r-none " : "btn rounded-r-none"}>Read Books</button>
 
-                <button onClick={()=>setActiveBtn('wishlist')} className={activeBtn==="read"?"btn rounded-l-none ":"btn btn-accent rounded-l-none"}>Wishlist Books</button>
+                <button onClick={() => setActiveBtn('wishlist')} className={activeBtn === "read" ? "btn rounded-l-none " : "btn btn-accent rounded-l-none"}>Wishlist Books</button>
             </div>
 
             <div className='mt-2'>
                 {
-                    activeBtn==="read"? <ReadBooks storedBook={storedBook}></ReadBooks>: <WishlistBooks wishlistStore={wishlistStore} ></WishlistBooks>
+                    activeBtn === "read" ? <ReadBooks sortingType={sortingType}></ReadBooks> : <WishlistBooks sortingType={sortingType} ></WishlistBooks>
                 }
             </div>
         </div>
