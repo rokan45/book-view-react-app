@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router';
 
 const Navbar = () => {
-    const [showText, setShowText] = useState(false)
+    const [showText, setShowText] = useState(true);
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm flex items-center justify-around">
@@ -32,8 +32,13 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end mr-5">
-                    <a className="btn"><button onClick={() => setShowText(!showText)}>{showText ? 'Login' : 'Logout'}</button></a>
-                   
+                    <button
+                        className={showText ? "btn btn-error" : "btn btn-accent"}
+                        onClick={() => setShowText(!showText)}
+                    >
+                        {showText ? 'Logout' : 'Login'}
+                    </button>
+
                 </div>
             </div>
         </div>
