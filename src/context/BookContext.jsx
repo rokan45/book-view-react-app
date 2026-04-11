@@ -8,8 +8,17 @@ const BookProvider = ({ children }) => {
 
     const [storedBook, setStoredBook] = useState([]);
 
-    const handleMarkAsRead = () => {
+    const handleMarkAsRead = (currentBook) => {
 
+        const isExistBook=storedBook.find((book)=>book.bookId===currentBook.bookId);
+        if(isExistBook){
+            alert("Book Already existed!")
+        }
+        else{
+            setStoredBook([...storedBook,currentBook]);
+        }
+
+        console.log(currentBook,storedBook,"Book")
     }
     const handleWishListBook = () => {
 
